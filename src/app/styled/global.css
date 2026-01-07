@@ -1,3 +1,9 @@
+@import "tailwindcss";
+
+@theme {
+  --breakpoint-pc: 940px;
+}
+
 html, body {
   margin: 0;
   padding: 0;
