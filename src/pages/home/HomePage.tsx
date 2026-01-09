@@ -1,12 +1,14 @@
 import { ContantsContainer } from "@/shared/ui/contantsContainer"
+import { WeatherContainer } from "@/widgets/weatherContainer"
 
 import { useEffect, useState } from 'react'
 import { useCurrentLocation } from '@/features/detectLocation'
 import { getWeather } from '@/features/weather/api/getWeather'
+import type { Weather } from "@/features/weather/model/weather.types"
 
 export function HomePage() {
   const { location, loading, error } = useCurrentLocation();
-  const [weather, setWeather] = useState(null);
+  const [weather, setWeather] = useState<Weather | null>(null);
 
     useEffect(() => {
     if (!location) return;
@@ -18,13 +20,11 @@ export function HomePage() {
 
   if (loading) return <div>위치 확인 중...</div>;
   if (error) return <div>{error}</div>;
+  if (!weather) return null;
 
   return (
     <ContantsContainer>
-      <div>
-        <h1>현재 위치 날씨</h1>
-        {weather && <pre>{JSON.stringify(weather, null, 2)}</pre>}
-      </div>
+      <WeatherContainer weather={weather} />
     </ContantsContainer>
   )
 }
