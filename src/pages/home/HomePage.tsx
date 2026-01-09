@@ -1,9 +1,9 @@
+import { ContantsContainer } from "@/shared/ui/contantsContainer"
+
 export function HomePage() {
   return (
-    <div>
-      <div>
-        메인 페이지
-      </div>
-    </div>
+    <ContantsContainer>
+      메인 페이지
+    </ContantsContainer>
   )
 }
