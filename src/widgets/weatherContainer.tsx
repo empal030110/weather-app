@@ -16,7 +16,7 @@ export function WeatherContainer({ weather }: Props) {
           <p className='text-[14px] text-gray-400'>{weather.description}</p>
         </div>
       </div>
-      <div className='flex items-center justify-center gap-[12px]'>
+      <div className='flex flex-col items-center justify-center gap-[12px] mb-[20px] pc:flex-row'>
         <WeatherCard temperatureName='최저 기온' temperature={weather.tempMin} />
         <WeatherCard temperatureName='최고 기온' temperature={weather.tempMax} />
         <WeatherCard temperatureName='체감 기온' temperature={weather.feelsLike} />
