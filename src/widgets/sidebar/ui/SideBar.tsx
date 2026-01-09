@@ -8,7 +8,7 @@ export function Sidebar() {
   return (
     <div className="absolute w-full bottom-0 shrink-0 border-t-[2px] pc:w-[240px] pc:border-r-[2px] pc:border-t-0 pc:py-[20px] border-gray-300 pc:static">
       <div className="flex flex-row justify-center gap-[4px] pc:flex-col pc:mr-[20px]">
-        <div className='hidden flex gap-[8px] items-center pc:block'>
+        <div className='hidden pc:flex gap-[8px] items-center'>
           <CiCloudOn size={50} />
           <p className='font-bold text-[18px]'>WEATHER</p>
         </div>
