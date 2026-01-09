@@ -1,5 +1,7 @@
+import { PageContainer } from "@/shared/ui/pageContainer"
+
 export function SearchPage() {
   return (
-    <div>검색 페이지</div>
+    <PageContainer>검색 페이지</PageContainer>
   )
 }

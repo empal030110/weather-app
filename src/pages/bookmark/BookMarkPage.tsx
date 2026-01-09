@@ -1,5 +1,7 @@
+import { PageContainer } from "@/shared/ui/pageContainer"
+
 export function BookMarkPage() {
   return (
-    <div>즐겨찾기 페이지</div>
+    <PageContainer>즐겨찾기 페이지</PageContainer>
   )
 }

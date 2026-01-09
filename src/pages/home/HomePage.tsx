@@ -1,5 +1,7 @@
+import { PageContainer } from "@/shared/ui/pageContainer"
+
 export function HomePage() {
   return (
-    <div>메인 페이지</div>
+    <PageContainer>메인 페이지</PageContainer>
   )
 }
