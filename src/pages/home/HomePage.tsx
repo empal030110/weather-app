@@ -1,26 +1,18 @@
 import { ContantsContainer } from "@/shared/ui/contantsContainer"
 import { WeatherContainer } from "@/widgets/weatherContainer"
 
-import { useEffect, useState } from 'react'
+import { useWeatherQuery } from '@/features/weather/model/useWeatherQuery'
 import { useCurrentLocation } from '@/features/detectLocation'
-import { getWeather } from '@/features/weather/api/getWeather'
-import type { Weather } from "@/features/weather/model/weather.types"
 
 export function HomePage() {
-  const { location, loading, error } = useCurrentLocation();
-  const [weather, setWeather] = useState<Weather | null>(null);
+  const { location, loading: locationLoading, error: locationError } = useCurrentLocation();
 
-    useEffect(() => {
-    if (!location) return;
+  const { data: weather, isLoading, error } = useWeatherQuery(location?.lat, location?.lon);
 
-    getWeather(location.lat, location.lon)
-    .then(setWeather)
-    .catch(console.error);
-    }, [location]);
-
-  if (loading) return <div>위치 확인 중...</div>;
-  if (error) return <div>{error}</div>;
-  if (!weather) return null;
+  if (locationLoading) return <div>위치 확인 중...</div>;
+  if (locationError) return <div>{locationError}</div>;
+  if (isLoading) return <div>날씨 불러오는 중...</div>;
+  if (error || !weather) return <div>날씨 에러</div>;
 
   return (
     <ContantsContainer>
