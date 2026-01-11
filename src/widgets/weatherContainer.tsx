@@ -3,12 +3,16 @@ import { WeatherCard } from '@/shared/ui/weatherCard'
 
 type Props = {
   weather: Weather;
+  regionName?: string | null;
 };
 
-export function WeatherContainer({ weather }: Props) {
+export function WeatherContainer({ weather, regionName }: Props) {
+  // 검색한 지역명이 있으면 그것을 사용, 없으면 OpenWeatherMap의 도시명 사용
+  const displayCity = regionName ? regionName.replaceAll('-', ' ') : weather.city;
+  
   return (
     <div className="w-full h-auto">
-      <div className='font-bold text-[24px] flex items-center justify-center'>{weather.city}</div>
+      <div className='font-bold text-[24px] flex items-center justify-center'>{displayCity}</div>
       <div className='flex items-center justify-center gap-[4px] my-[12px]'>
         <img src={`https://openweathermap.org/img/wn/${weather.icon}@2x.png`} alt={`${weather.weatherMain}`} />
         <div>
