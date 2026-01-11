@@ -1,0 +1,1 @@
+export { getCoordinates } from './api/getCoordinates'

@@ -7,7 +7,9 @@ import { useCurrentLocation } from '@/features/detectLocation'
 export function HomePage() {
   const { location, loading: locationLoading, error: locationError } = useCurrentLocation();
 
-  const { data: weather, isLoading, error } = useWeatherQuery(location?.lat, location?.lon);
+  const { data: weather, isLoading, error } = useWeatherQuery(
+    location ? { lat: location.lat, lon: location.lon } : null
+  );
 
   if (locationLoading) return <div>위치 확인 중...</div>;
   if (locationError) return <div>{locationError}</div>;

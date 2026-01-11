@@ -7,7 +7,7 @@ type Props = {
 
 export function WeatherContainer({ weather }: Props) {
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-auto">
       <div className='font-bold text-[24px] flex items-center justify-center'>{weather.city}</div>
       <div className='flex items-center justify-center gap-[4px] my-[12px]'>
         <img src={`https://openweathermap.org/img/wn/${weather.icon}@2x.png`} alt={`${weather.weatherMain}`} />

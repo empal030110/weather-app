@@ -1,15 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import { getWeather } from '../api/getWeather';
 
-export function useWeatherQuery(lat?: number, lon?: number) {
+export function useWeatherQuery( coords: { lat: number; lon: number } | null ) {
   return useQuery({
-    queryKey: ['weather', lat, lon],
-    queryFn: () => {
-      if (lat == null || lon == null) {
-        throw new Error('위치 정보가 없습니다.');
-      }
-      return getWeather(lat, lon);
-    },
-    enabled: lat != null && lon != null,
+    queryKey: ['weather', coords],
+    queryFn: () => getWeather(coords!.lat, coords!.lon),
+    enabled: !!coords,
   });
 }
