@@ -1,1 +1,1 @@
-export { getCoordinates } from './api/getCoordinates'
+export { getCoordinates, getAddressFromCoordinates } from './api/getCoordinates'
