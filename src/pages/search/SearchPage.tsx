@@ -7,20 +7,34 @@ import { ContantsContainer } from '@/shared/ui/contantsContainer'
 
 export function SearchPage() {
   const [coords, setCoords] = useState<{ lat: number; lon: number } | null>(null);
+  const [searchError, setSearchError] = useState<string | null>(null);
 
   const { data: weather, isLoading, error } = useWeatherQuery(coords);
 
   const handleSelectRegion = async (region: string) => {
-    const coordinates = await getCoordinates(region);
-    setCoords(coordinates);
+    try {
+      setSearchError(null);
+      const coordinates = await getCoordinates(region);
+      setCoords(coordinates);
+    } catch (error) {
+      console.error('검색 오류:', error);
+      setSearchError(error instanceof Error ? error.message : '검색 중 오류가 발생했습니다.');
+      setCoords(null);
+    }
   };
 
   return (
     <ContantsContainer>
       <SearchPanel onSelectRegion={handleSelectRegion} />
 
-      {isLoading && <div>날씨 불러오는 중...</div>}
-      {error && <div>에러 발생</div>}
+      {searchError && (
+        <div className="mt-[16px] p-[16px] border border-red-300 rounded-[4px] bg-red-50 text-red-700 text-center">
+          {searchError}
+        </div>
+      )}
+
+      {isLoading && <div className="mt-[16px] text-center">날씨 불러오는 중...</div>}
+      {error && !searchError && <div className="mt-[16px] text-center text-red-700">날씨 정보를 가져오는 중 오류가 발생했습니다.</div>}
       {weather && <WeatherContainer weather={weather} />}
     </ContantsContainer>
   );
